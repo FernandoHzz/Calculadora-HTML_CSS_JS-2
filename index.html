@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<script>
+    function insertNewElement(element) {
+        var result = document.getElementById('result').innerHTML;
+        document.getElementById('result').innerHTML = result + element;
+
+        return;
+    }
+
+    function calculate() {
+
+        var result = document.getElementById('result').innerHTML;
+
+        if (eval(result) == 'Infinity') {
+            document.getElementById('result').innerHTML = 'Não é possivel dividir por zero!!!'
+
+        } else {
+            document.getElementById('result').innerHTML = result + ' = ' + eval(result);
+        }
+
+        return;
+    }
+
+    function percentageCalc() {
+
+    }
+
+
+    function resetDisplay() {
+        document.getElementById('result').innerHTML = '';
+
+        return;
+    }
+
+    function changeSignal() {
+        var result = document.getElementById('result').innerHTML;
+
+        document.getElementById('result').innerHTML = result * (-1);
+
+        return;
+    }
+
+    function DeleteLastElement() {
+        var result = document.getElementById('result').innerHTML;
+        document.getElementById('result').innerHTML = result.substring(0, result.length - 1);
+    }
+
+    document.addEventListener("keydown", function (keyboard) {
+
+        var keyName = parseInt(keyboard.key);
+
+        if (keyName >= 0 && keyName <= 9) {
+
+            insertNewElement(keyName);
+
+        } else {
+
+            switch (keyboard.key) {
+
+                case '+':
+                    insertNewElement('+');
+                    break;
+                case '-':
+                    insertNewElement('-');
+                    break;
+                case '/':
+                    insertNewElement('/');
+                    break;
+                case ',':
+                    insertNewElement('.');
+                    break;
+                case '.':
+                    insertNewElement('.');
+                    break;
+                case '*':
+                    insertNewElement('*');
+                    break;
+                case '%':
+                    percentageCalc();
+                    break;
+                case 'Enter':
+                    calculate();
+                    break;
+                case 'Backspace':
+                    DeleteLastElement();
+                    break;
+            }
+        }
+
+    })
+
+</script>
+
+<body>
+    <div class="body-background">
+        <div class="calculator">
+            <div id="result"></div>
+            <button onclick="resetDisplay()">C</button>
+            <button onclick="">%</button>
+            <button onclick="insertNewElement('/')">/</button>
+            <button onclick="insertNewElement('*')">*</button><br>
+            <button onclick="insertNewElement('7')">7</button>
+            <button onclick="insertNewElement('8')">8</button>
+            <button onclick="insertNewElement('9')">9</button>
+            <button onclick="insertNewElement('+')">+</button><br>
+            <button onclick="insertNewElement('4')">4</button>
+            <button onclick="insertNewElement('5')">5</button>
+            <button onclick="insertNewElement('6')">6</button>
+            <button onclick="insertNewElement('-')">-</button><br>
+            <button onclick="insertNewElement('1')">1</button>
+            <button onclick="insertNewElement('2')">2</button>
+            <button onclick="insertNewElement('3')">3</button>
+            <button onclick="insertNewElement('.')">.</button><br>
+            <button onclick="insertNewElement('0')">0</button>
+            <button onclick="changeSignal()">+/-</button>
+            <button id="calculate" onclick="calculate()">=</button>
+        </div>
+    </div>
+</body>
+
+</html>
